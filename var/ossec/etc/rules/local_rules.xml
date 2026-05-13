@@ -10,7 +10,8 @@
     <match>Tunnel created</match>
     <description>Cloudflare: Tunnel created</description>
     <group>cloudflare,tunnel,</group>
-  </rule>
+    <field name="agent.name" negate="yes">cf-automation-01</field>
+</rule>
 
   <rule id="340000" level="12">
     <decoded_as>json</decoded_as>
