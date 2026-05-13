@@ -41,6 +41,7 @@
     <match>access denied for user ubuntu</match>
     <description>SSHD: access denied for ubuntu by PAM configuration</description>
     <group>syslog,sshd,pam,</group>
-  </rule>
+    <field name="data.srcip" negate="yes">10.10.1.50</field>
+</rule>
 
 </group>
