@@ -1,0 +1,46 @@
+<!--
+  Canonical Wazuh local rules — seed file for the Suppression Engine demo.
+  Mirrors rules currently firing at level >= 12 on stg-wazuh-server-test.
+  Drop this at var/ossec/etc/rules/local_rules.xml in mayhumst/wazuh-dummy.
+-->
+<group name="local,canonical,">
+
+  <rule id="300001" level="12">
+    <if_sid>1002</if_sid>
+    <match>Tunnel created</match>
+    <description>Cloudflare: Tunnel created</description>
+    <group>cloudflare,tunnel,</group>
+  </rule>
+
+  <rule id="340000" level="12">
+    <decoded_as>json</decoded_as>
+    <field name="data.detector">gitleaks</field>
+    <field name="data.rule">GitHubToken</field>
+    <description>Secret detected: GitHubToken found in $(data.file)</description>
+    <group>secrets,gitleaks,</group>
+  </rule>
+
+  <rule id="390405" level="12">
+    <if_sid>530</if_sid>
+    <match>landscape</match>
+    <regex>suspicious payload</regex>
+    <description>CRITICAL: Suspicious payload detected in Landscape script run by $(data.user)!</description>
+    <group>landscape,suspicious,</group>
+  </rule>
+
+  <rule id="420002" level="14">
+    <decoded_as>json</decoded_as>
+    <field name="data.detector">credscan</field>
+    <field name="data.scope">canonical-internal</field>
+    <description>CRITICAL: Exposed credentials found for internal Canonical user.</description>
+    <group>secrets,credentials,canonical,</group>
+  </rule>
+
+  <rule id="430001" level="12">
+    <if_sid>5700</if_sid>
+    <match>access denied for user ubuntu</match>
+    <description>SSHD: access denied for ubuntu by PAM configuration</description>
+    <group>syslog,sshd,pam,</group>
+  </rule>
+
+</group>
