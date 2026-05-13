@@ -18,7 +18,8 @@
     <field name="data.rule">GitHubToken</field>
     <description>Secret detected: GitHubToken found in $(data.file)</description>
     <group>secrets,gitleaks,</group>
-  </rule>
+    <field name="agent.name" negate="yes">dev-workstation</field>
+</rule>
 
   <rule id="390405" level="12">
     <if_sid>530</if_sid>
