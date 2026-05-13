@@ -43,4 +43,13 @@
     <group>syslog,sshd,pam,</group>
   </rule>
 
+
+  <group name="local,suppression,">
+    <rule id="440001" level="0" overwrite="no">
+      <if_sid>430001</if_sid>
+      <field name="agent.ip" negate="yes">10.10.1.50</field>
+      <description>Suppress noisy events from rule 430001</description>
+    </rule>
+  </group>
+
 </group>
